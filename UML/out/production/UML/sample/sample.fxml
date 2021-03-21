@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+
+<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="sample.Controller">
+    <children>
+        <MenuBar prefHeight="25.0" prefWidth="1280.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem fx:id="closeBtn" mnemonicParsing="false" text="Close" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                    <items>
+                        <MenuItem fx:id="groupBtn" mnemonicParsing="false" text="Group" />
+                        <MenuItem fx:id="unGroupBtn" mnemonicParsing="false" text="Ungroup" />
+                        <MenuItem fx:id="changeNameBtn" mnemonicParsing="false" text="Change Object Name" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+
+        <Button fx:id="selectBtn" layoutX="50.0" layoutY="60.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="98.0">         <graphic>
+            <ImageView fitHeight="70.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@../image/select1.png" />
+                </image>
+            </ImageView>
+        </graphic>
+        </Button>
+        <Button fx:id="associationBtn" layoutX="50.0" layoutY="165.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="98.0">
+         <graphic>
+            <ImageView fitHeight="70.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/association.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+        <Button fx:id="generalizationBtn" layoutX="50.0" layoutY="270.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="98.0">
+         <graphic>
+            <ImageView fitHeight="70.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/generalization.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+        <Button fx:id="compositionBtn" layoutX="50.0" layoutY="375.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="98.0">
+            <graphic>
+                <ImageView fitHeight="70.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../image/composition1.png" />
+                    </image>
+                </ImageView>
+            </graphic></Button>
+        <Button fx:id="classBtn" layoutX="50.0" layoutY="480.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="98.0" >
+            <graphic>
+                <ImageView fitHeight="70.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../image/Class1.png" />
+                    </image>
+                </ImageView>
+            </graphic></Button>
+        <Button fx:id="caseBtn" layoutX="50.0" layoutY="585.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="98.0" >
+            <graphic>
+                <ImageView fitHeight="70.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../image/usecase1.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+
+        <Canvas fx:id="canvas" height="698.0" layoutX="243.0" layoutY="29.0" width="1040.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="720.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="190.0" />
+    </children>
+
+</Pane>
