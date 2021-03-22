@@ -7,4 +7,5 @@ int main() {
     *pi = 5;
     cout << *pi << endl; 
     free(pi);
+    return 0;
 }
