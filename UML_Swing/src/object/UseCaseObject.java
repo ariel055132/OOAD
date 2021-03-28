@@ -22,6 +22,10 @@ public class UseCaseObject extends Shape{
         graphics2D.drawOval(point1.x, point1.y, width, height);
         graphics2D.drawString(objName, point1.x + xForAlign, point1.y + 30);
         // To-do: Show Port when in select mode and get selected
-
+        if (this.isSelected) {
+            for (Port port : portsPosition) {
+                port.draw(graphics2D);
+            }
+        }
     }
 }

@@ -9,16 +9,21 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 // 6 buttons
-
 public class ToolBar extends JToolBar {
     public ArrayList<ToolButton> buttonArrayList = new ArrayList<>();
     public String[] imageNameList;
+    public MenuBar menuBar;
+    public Canvas canvas;
+
     public ToolBar() {
+        canvas = Canvas.getInstance();
+        menuBar = MenuBar.getMenuBar();
         setLayout(new GridLayout(6,1));
 
         // right click image folder to obtain the file path
         ImageIcon select = new ImageIcon("src/image/select1.png");
         ToolButton selectButton = new ToolButton(select, new SelectMode());
+        buttonArrayList.add(selectButton);
         add(selectButton);
 
         ImageIcon association = new ImageIcon("src/image/association2.png");
@@ -72,7 +77,14 @@ public class ToolBar extends JToolBar {
                 ((JButton)e.getSource()).setOpaque(true);
                 ((JButton)e.getSource()).setBackground(Color.LIGHT_GRAY);
                 Canvas.getInstance().setCurrentMode(mode);
+                setMenuUnable();
             }
+        }
+
+        void setMenuUnable() {
+            menuBar.setUnGroupItem(false);
+            menuBar.setGroupItem(false);
+            menuBar.setNameItem(false);
         }
 
         void resetColor() {

@@ -41,9 +41,8 @@ public class Canvas extends JPanel {
 
             @Override
             public void mouseDragged(MouseEvent e) {
-                //menuBar.setNameItem(false);
+                menuBar.setNameItem(false);
             }
-
         });
     }
 
@@ -83,8 +82,7 @@ public class Canvas extends JPanel {
     public List<Shape> getShapeSelected() {
         return shapeSelected;
     }
-
-    public  List<Line> getSLineList() {
+    public List<Line> getSLineList() {
         return lineList;
     }
 
@@ -95,18 +93,17 @@ public class Canvas extends JPanel {
         }
     }
 
-    /*
+
     public void changeName() {
         String input;
         input = JOptionPane.showInputDialog("Input your new object name");
         if (input != null && input != "")
-            //因為預設是只有一個才能改名
+            // only one object can edit the name
             shapeSelected.get(0).setObjName(input);
     }
-    */
+
 
     public void groupObj() {
-        //because my for always from 0 to end
         getShapeList().add(0, new GroupObject(getShapeSelected()));
         Iterator<Shape> iterator = getShapeList().iterator();
         while (iterator.hasNext()) {
@@ -119,14 +116,14 @@ public class Canvas extends JPanel {
         menuBar.setUnGroupItem(true);
     }
 
-    /*
+
     public void unGroupObj() {
-        for (Shape s: getShapeSelected().get(0).getShapesIngroup()) {
+        for (Shape s: getShapeSelected().get(0).getShapeList()) {
             getShapeList().add(0, s);
             s.setSelected(false);
         }
         getShapeList().remove(getShapeSelected().get(0));
     }
-    */
+
 
 }

@@ -45,9 +45,9 @@ public class Line {
         // 画线
         graphics2D.drawLine(startPoint.x, startPoint.y, endPoint.x, endPoint.y);
         // 画箭头的一半
-        graphics2D.drawLine(endPoint.x, endPoint.y, x3, y3);
+        //graphics2D.drawLine(endPoint.x, endPoint.y, x3, y3);
         // 画箭头的另一半
-        graphics2D.drawLine(endPoint.x, endPoint.y, x4, y4);
+        //graphics2D.drawLine(endPoint.x, endPoint.y, x4, y4);
     }
 
     // Reference

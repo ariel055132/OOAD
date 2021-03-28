@@ -27,6 +27,10 @@ public class ClassObject extends Shape{
         graphics2D.drawString(objName,point1.x + xForAlign, point1.y + 20);
 
         // To-do: Show Port when in select mode and get selected
-
+        if (this.isSelected) {
+            for (Port port : portsPosition) {
+                port.draw(graphics2D);
+            }
+        }
     }
 }

@@ -12,7 +12,7 @@ public class Main extends JFrame{
     public Canvas canvas;
 
     public Main() {
-        menuBar = new MenuBar();
+        menuBar = MenuBar.getMenuBar();
         toolBar = new ToolBar();
         canvas = Canvas.getInstance();
         getContentPane().setLayout(new BorderLayout());

@@ -19,6 +19,7 @@ public class BaseLineMode extends BaseObjectMode{
             if (startShape.getShapeList() == null) {
                 startPort = startShape.findNearestPort(startPoint);
             } else {
+                // no shape
                 startShape = null;
             }
         }

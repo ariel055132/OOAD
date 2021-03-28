@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 // Is Menubar a JMenuBar? Yes
 public class MenuBar extends JMenuBar {
     public static MenuBar menuBar = null;
-    public JMenuItem groupItem, unGroupItem, nameItem;
+    private JMenuItem group, ungroup, changeObjectName;
 
     public MenuBar() {
         // File menu
@@ -21,18 +21,22 @@ public class MenuBar extends JMenuBar {
         add(editMenu);
 
         // To-do Group function
-        JMenuItem group = new JMenuItem("Group");
+        group = new JMenuItem("Group");
         group.addActionListener(new groupItemListener());
         group.setEnabled(false);
         editMenu.add(group);
 
         // To-do UnGroup function
-        JMenuItem ungroup = new JMenuItem("UnGroup");
+        ungroup = new JMenuItem("UnGroup");
+        ungroup.addActionListener(new unGroupItemListener());
+        ungroup.setEnabled(false);
         editMenu.add(ungroup);
 
         // To-do change Object Name function
-        JMenuItem changeObjName = new JMenuItem("Change Object Name");
-        editMenu.add(changeObjName);
+        changeObjectName = new JMenuItem("Change Object Name");
+        changeObjectName.addActionListener(new nameItemListener());
+        changeObjectName.setEnabled(false);
+        editMenu.add(changeObjectName);
 
     }
 
@@ -49,7 +53,7 @@ public class MenuBar extends JMenuBar {
             Canvas.getInstance().groupObj();
         }
     }
-    /*
+
     class unGroupItemListener implements ActionListener {
         public void actionPerformed(ActionEvent e){
             Canvas.getInstance().unGroupObj();
@@ -61,19 +65,17 @@ public class MenuBar extends JMenuBar {
             Canvas.getInstance().repaint();
         }
     }
-    */
 
     public void setGroupItem(boolean enable) {
-        groupItem.setEnabled(enable);
+        group.setEnabled(enable);
     }
 
     public void setUnGroupItem(boolean enable) {
-        this.unGroupItem.setEnabled(enable);
+        this.ungroup.setEnabled(enable);
     }
 
-    /*
     public void setNameItem(boolean enable) {
-        this.nameItem.setEnabled(enable);
+        this.changeObjectName.setEnabled(enable);
     }
-     */
+
 }
