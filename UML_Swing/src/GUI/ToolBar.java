@@ -61,21 +61,21 @@ public class ToolBar extends JToolBar {
         public ToolButton (ImageIcon imageIcon, BaseObjectMode toolMode) {
             this.mode = toolMode;
             //System.out.println(toolMode.toString());
-            setIcon(imageIcon);
+            this.setIcon(imageIcon);
             // https://stackoverflow.com/questions/2536873/how-can-i-set-size-of-a-button
-            setPreferredSize(new Dimension(100, 40));
-            setOpaque(false);
-            setBorderPainted(true);
-            addActionListener(new ToolButtonListener());
+            this.setPreferredSize(new Dimension(100, 40));
+            this.setOpaque(false);
+            this.setBorderPainted(true);
+            this.addActionListener(new ToolButtonListener());
         }
 
         public class ToolButtonListener implements ActionListener {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent actionEvent) {
                 resetColor();
                 System.out.println(mode);
-                ((JButton)e.getSource()).setOpaque(true);
-                ((JButton)e.getSource()).setBackground(Color.LIGHT_GRAY);
+                ((JButton)actionEvent.getSource()).setOpaque(true);
+                ((JButton)actionEvent.getSource()).setBackground(Color.LIGHT_GRAY);
                 Canvas.getInstance().setCurrentMode(mode);
                 setMenuUnable();
             }

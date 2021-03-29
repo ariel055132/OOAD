@@ -13,7 +13,7 @@ import object.Shape;
 import object.Line;
 
 public class Canvas extends JPanel {
-    private static Canvas instance = null; // for singleton
+    private static Canvas instance = null;
     private List<Shape> shapeList  = new ArrayList<>();
     private List<Line> lineList  = new ArrayList<>();
     private List<Shape> shapeSelected = new ArrayList<>();
@@ -54,20 +54,20 @@ public class Canvas extends JPanel {
     }
 
     @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
+    protected void paintComponent(Graphics graphics) {
+        super.paintComponent(graphics);
 
-        Graphics2D g2 = (Graphics2D)g;
-        g2.setStroke(new BasicStroke(2.0f));
+        Graphics2D graphics2D = (Graphics2D)graphics;
+        graphics2D.setStroke(new BasicStroke(2.0f));
 
         Collections.sort(shapeList,new depthComparator());
 
-        for (Shape s: shapeList) {
-            s.draw(g2);
+        for (Shape shape: shapeList) {
+            shape.draw(graphics2D);
         }
 
-        for (Line l: lineList) {
-            l.draw(g2);
+        for (Line line: lineList) {
+            line.draw(graphics2D);
         }
 
     }
@@ -88,12 +88,12 @@ public class Canvas extends JPanel {
 
 
     class depthComparator implements Comparator<Shape> {
-        public int compare(Shape s1, Shape s2) {
-            return s2.getDepth() - s1.getDepth();  //倒序
+        public int compare(Shape shape1, Shape shape2) {
+            return shape2.getDepth() - shape1.getDepth();
         }
     }
 
-
+    // change the object name of the specified object
     public void changeName() {
         String input;
         input = JOptionPane.showInputDialog("Input your new object name");
@@ -102,7 +102,7 @@ public class Canvas extends JPanel {
             shapeSelected.get(0).setObjName(input);
     }
 
-
+    // group multiple object
     public void groupObj() {
         getShapeList().add(0, new GroupObject(getShapeSelected()));
         Iterator<Shape> iterator = getShapeList().iterator();
@@ -116,11 +116,11 @@ public class Canvas extends JPanel {
         menuBar.setUnGroupItem(true);
     }
 
-
+    // ungroup object
     public void unGroupObj() {
-        for (Shape s: getShapeSelected().get(0).getShapeList()) {
-            getShapeList().add(0, s);
-            s.setSelected(false);
+        for (Shape shape: getShapeSelected().get(0).getShapeList()) {
+            getShapeList().add(0, shape);
+            shape.setSelected(false);
         }
         getShapeList().remove(getShapeSelected().get(0));
     }

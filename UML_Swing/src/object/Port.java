@@ -6,8 +6,8 @@ public class Port extends Shape{
     public int portWidth, portHeight;
     public Port(Point point) {
         this.point1 = point;
-        this.portWidth = 10;
-        this.portHeight = 10;
+        this.portWidth = 8;
+        this.portHeight = 8;
         this.depth = 0;
     }
 

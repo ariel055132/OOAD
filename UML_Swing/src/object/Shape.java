@@ -6,7 +6,7 @@ import java.util.List;
 import gui.Canvas;
 
 public abstract class Shape {
-    public Point point1, p2;
+    public Point point1, point2;
     public int width, height;
     public int depth = 90;  // depth of object
     public boolean isSelected = false;
@@ -29,8 +29,8 @@ public abstract class Shape {
         return tmpPort;
     }
 
-    public double getDistance(Point point1, Point p2){
-        double distance = Math.sqrt((point1.x-p2.x)*(point1.x-p2.x)+(point1.y-p2.y)*(point1.y-p2.y));
+    public double getDistance(Point point1, Point point2){
+        double distance = Math.sqrt((point1.x-point2.x)*(point1.x-point2.x)+(point1.y-point2.y)*(point1.y-point2.y));
         return distance;
     }
 
@@ -46,12 +46,12 @@ public abstract class Shape {
         portsPosition.add(topPort);
     }
 
-    // Adjust the position of ports according to the offset of X and Y
+    // Adjust the position according to the offset of X and Y
     public void adjust(int offsetX, int offsetY) {
-        Point newP1 = new Point(this.getPoint1().x + offsetX, this.getPoint1().y + offsetY);
-        this.setP1(newP1);
-        for (Shape s: this.getPortsPosition()) {
-            s.adjust(offsetX, offsetY);
+        Point newpoint1 = new Point(this.getPoint1().x + offsetX, this.getPoint1().y + offsetY);
+        this.setPoint1(newpoint1);
+        for (Shape shape: this.getPortsPosition()) {
+            shape.adjust(offsetX, offsetY);
         }
     }
 
@@ -87,31 +87,25 @@ public abstract class Shape {
     public int getWidth() {
         return width;
     }
-
     public int getHeight() {
         return height;
     }
-
     public Point getPoint1() {
         return point1;
     }
-
-    public void setP1(Point point1) {
+    public void setPoint1(Point point1) {
         this.point1 = point1;
     }
 
-
-
     public void checkOverlap() {
-        for (Shape s:Canvas.getInstance().getShapeList()){
+        for (Shape shape:Canvas.getInstance().getShapeList()){
             //compare with other and check intersect
-            if (!s.equals(this) && s.isIntersected(this.getOwnShape())) {
-                if (s.depth <= this.depth)
-                    this.depth = s.depth - 1;
+            if (!shape.equals(this) && shape.isIntersected(this.getOwnShape())) {
+                if (shape.depth <= this.depth)
+                    this.depth = shape.depth - 1;
                 else
                     this.depth--;
             }
-
         }
     }
 
@@ -119,15 +113,12 @@ public abstract class Shape {
     public Rectangle getOwnShape() { //if line can be covered, it should be change
         return new Rectangle(point1.x, point1.y, this.width, this.height);
     }
-
     public int getDepth() {
         return depth;
     }
-
     public void setDepth(int depth) {
         this.depth = depth;
     }
-
     public void setSelected(boolean b) {
         this.isSelected = b;
     }

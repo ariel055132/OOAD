@@ -48,6 +48,8 @@ public class Line {
         //graphics2D.drawLine(endPoint.x, endPoint.y, x3, y3);
         // 画箭头的另一半
         //graphics2D.drawLine(endPoint.x, endPoint.y, x4, y4);
+        graphics2D.fillRect(startPoint.x - 4, startPoint.y - 4, 8, 8);
+        graphics2D.fillRect(endPoint.x - 4, endPoint.y - 4, 8, 8);
     }
 
     // Reference

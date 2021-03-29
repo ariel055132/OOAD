@@ -29,18 +29,22 @@ public class SelectMode extends BaseObjectMode{
         // drag the area
         if (!endPoint.equals(startPoint)) {
             int offsetX = endPoint.x - startPoint.x;
-            int offsetY = endPoint.x - startPoint.x;
-            if (hasShape == -1) {
-                selectShape(offsetY, offsetY);
+            int offsetY = endPoint.y - startPoint.y;
+            if (hasShape != -1) {
+                Shape shape = canvas.getShapeList().get(hasShape);
+                shape.adjust(offsetX, offsetY);
+                System.out.println(e.getPoint());
+                shape.setDepth(90);
+                shape.checkOverlap();
+
+
+            }else if (hasShape == -1) {
+                selectShape(offsetX, offsetY);
                 for (Shape shape : canvas.getShapeSelected()) {
                     shape.setSelected(true);
                 }
-            }else if (hasShape != -1) {
-                Shape shape = canvas.getShapeList().get(hasShape);
-                shape.adjust(offsetX, offsetY);
-                shape.setDepth(90);
-                shape.checkOverlap();
             }
+
             if (canvas.getShapeSelected().size() >= 2) {
                 menuBar.setGroupItem(true);
             }
@@ -68,6 +72,10 @@ public class SelectMode extends BaseObjectMode{
     // select Shapes that are in dragged area
     public void selectShape(int offsetX, int offsetY) {
         Rectangle bound = null; // bound of the dragged area
+        // right bottom -> left top
+        // right top -> left down
+        // left bottom -> right top
+        // left top -> right bottom
         if (offsetX < 0) {
             if (offsetY < 0) {
                 bound = new Rectangle(endPoint.x, endPoint.y, -offsetX, -offsetY);

@@ -16,8 +16,9 @@ public class GeneralizationLine extends Line{
     public void draw(Graphics2D graphics2D) {
         super.draw(graphics2D);
         GeneralPath triangle = new GeneralPath();
-        triangle.moveTo(x3, y3);
-        triangle.moveTo(x4, y4);
+        triangle.moveTo(endPoint.x, endPoint.y);
+        triangle.lineTo(x3, y3);
+        triangle.lineTo(x4, y4);
         triangle.closePath();
         graphics2D.draw(triangle);
     }

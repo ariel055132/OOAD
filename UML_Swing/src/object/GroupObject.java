@@ -20,16 +20,16 @@ public class GroupObject extends Shape{
     }
 
     @Override
-    public void draw(Graphics2D g) {
+    public void draw(Graphics2D graphics2D) {
         if (this.isSelected) {
             for (Shape shape : shapeList) {
                 shape.setSelected(true);
-                shape.draw(g);
+                shape.draw(graphics2D);
             }
         } else {
             for (Shape shape : shapeList) {
                 shape.setSelected(false);
-                shape.draw(g);
+                shape.draw(graphics2D);
             }
         }
     }
