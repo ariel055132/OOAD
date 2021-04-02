@@ -12,7 +12,7 @@ import object.GroupObject;
 import object.Shape;
 import object.Line;
 
-public class Canvas extends JPanel {
+public class Canvas extends JPanel{
     private static Canvas instance = null;
     private List<Shape> shapeList  = new ArrayList<>();
     private List<Line> lineList  = new ArrayList<>();
@@ -41,9 +41,22 @@ public class Canvas extends JPanel {
 
             @Override
             public void mouseDragged(MouseEvent e) {
-                menuBar.setNameItem(false);
+                menuBar.setObjectname(false);
             }
         });
+    }
+
+    public void setCurrentMode(BaseObjectMode mode) {
+        currentMode = mode;
+    }
+    public List<Shape> getShapeList() {
+        return shapeList;
+    }
+    public List<Shape> getShapeSelected() {
+        return shapeSelected;
+    }
+    public List<Line> getLineList() {
+        return lineList;
     }
 
     public static Canvas getInstance() {
@@ -56,48 +69,24 @@ public class Canvas extends JPanel {
     @Override
     protected void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
-
         Graphics2D graphics2D = (Graphics2D)graphics;
         graphics2D.setStroke(new BasicStroke(2.0f));
-
-        Collections.sort(shapeList,new depthComparator());
-
+        shapeList.sort(new depthComparator());
         for (Shape shape: shapeList) {
             shape.draw(graphics2D);
         }
-
         for (Line line: lineList) {
             line.draw(graphics2D);
         }
-
-    }
-
-    public void setCurrentMode(BaseObjectMode mode) {
-        currentMode = mode;
-    }
-
-    public List<Shape> getShapeList() {
-        return shapeList;
-    }
-    public List<Shape> getShapeSelected() {
-        return shapeSelected;
-    }
-    public List<Line> getSLineList() {
-        return lineList;
     }
 
 
-    class depthComparator implements Comparator<Shape> {
-        public int compare(Shape shape1, Shape shape2) {
-            return shape2.getDepth() - shape1.getDepth();
-        }
-    }
 
     // change the object name of the specified object
     public void changeName() {
         String input;
         input = JOptionPane.showInputDialog("Input your new object name");
-        if (input != null && input != "")
+        if (input != null && !input.equals(""))
             // only one object can edit the name
             shapeSelected.get(0).setObjName(input);
     }
@@ -105,15 +94,10 @@ public class Canvas extends JPanel {
     // group multiple object
     public void groupObj() {
         getShapeList().add(0, new GroupObject(getShapeSelected()));
-        Iterator<Shape> iterator = getShapeList().iterator();
-        while (iterator.hasNext()) {
-            if (getShapeSelected().contains(iterator.next())) {
-                iterator.remove();
-            }
-        }
+        getShapeList().removeIf(shape -> getShapeSelected().contains(shape));
         getShapeSelected().clear();
         getShapeSelected().add(getShapeList().get(0));
-        menuBar.setUnGroupItem(true);
+        menuBar.setUngroup(true);
     }
 
     // ungroup object

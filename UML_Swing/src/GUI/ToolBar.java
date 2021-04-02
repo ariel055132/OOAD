@@ -11,7 +11,6 @@ import java.util.ArrayList;
 // 6 buttons
 public class ToolBar extends JToolBar {
     public ArrayList<ToolButton> buttonArrayList = new ArrayList<>();
-    public String[] imageNameList;
     public MenuBar menuBar;
     public Canvas canvas;
 
@@ -52,17 +51,12 @@ public class ToolBar extends JToolBar {
         add(usecaseButton);
     }
 
-
-    // Is ToolButton a JButton/Button? Yes
+    // https://stackoverflow.com/questions/2536873/how-can-i-set-size-of-a-button
     public class ToolButton extends JButton{
         BaseObjectMode mode;
-        JButton currentClicked = null;
-        Canvas canvas;
         public ToolButton (ImageIcon imageIcon, BaseObjectMode toolMode) {
             this.mode = toolMode;
-            //System.out.println(toolMode.toString());
             this.setIcon(imageIcon);
-            // https://stackoverflow.com/questions/2536873/how-can-i-set-size-of-a-button
             this.setPreferredSize(new Dimension(100, 40));
             this.setOpaque(false);
             this.setBorderPainted(true);
@@ -74,26 +68,24 @@ public class ToolBar extends JToolBar {
             public void actionPerformed(ActionEvent actionEvent) {
                 resetColor();
                 System.out.println(mode);
-                ((JButton)actionEvent.getSource()).setOpaque(true);
-                ((JButton)actionEvent.getSource()).setBackground(Color.LIGHT_GRAY);
+                ((JButton) actionEvent.getSource()).setOpaque(true);
+                ((JButton) actionEvent.getSource()).setBackground(Color.LIGHT_GRAY);
                 Canvas.getInstance().setCurrentMode(mode);
                 setMenuUnable();
             }
-        }
 
-        void setMenuUnable() {
-            menuBar.setUnGroupItem(false);
-            menuBar.setGroupItem(false);
-            menuBar.setNameItem(false);
-        }
+            void setMenuUnable() {
+                menuBar.setUngroup(false);
+                menuBar.setGroup(false);
+                menuBar.setObjectname(false);
+            }
 
-        void resetColor() {
-            for (ToolButton button : buttonArrayList) {
-                button.setBackground(new Color(0,0,0));
-                button.setOpaque(false);
+            void resetColor() {
+                for (ToolButton button : buttonArrayList) {
+                    button.setBackground(new Color(0, 0, 0));
+                    button.setOpaque(false);
+                }
             }
         }
-
-
     }
 }

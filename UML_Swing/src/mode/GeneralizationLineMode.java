@@ -1,21 +1,20 @@
 package mode;
 
-import object.CompositionLine;
 import object.GeneralizationLine;
 
 import java.awt.event.MouseEvent;
 
 public class GeneralizationLineMode extends BaseLineMode{
     @Override
-    public void mousePressed(MouseEvent e) {
-        super.mousePressed(e);
+    public void mousePressed(MouseEvent mouseEvent) {
+        super.mousePressed(mouseEvent);
     }
 
     @Override
-    public void mouseReleased(MouseEvent e) {
-        endPoint = e.getPoint();
+    public void mouseReleased(MouseEvent mouseEvent) {
+        endPoint = mouseEvent.getPoint();
         if (checkWhetherAdd(endPoint)) {
-            canvas.getSLineList().add(new GeneralizationLine(startPort, endPort));
+            canvas.getLineList().add(new GeneralizationLine(startPort, endPort));
         }
     }
 }

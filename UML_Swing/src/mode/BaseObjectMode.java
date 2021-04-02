@@ -8,33 +8,26 @@ import java.awt.event.MouseEvent;
 public class BaseObjectMode {
     protected Point startPoint, endPoint;
     protected Canvas canvas = Canvas.getInstance();
-    public void mousePressed(MouseEvent e){
+    public void mousePressed(MouseEvent mouseEvent){
 
-    };
-
-    public void mouseReleased(MouseEvent e){
     }
 
-    public void mouseClicked(MouseEvent e){
+    public void mouseReleased(MouseEvent mouseEvent){
+    }
 
-    };
-
-
-    public int checkInShape(Point p) {
+    public int checkInShape(Point point) {
         for (int i = canvas.getShapeList().size() - 1; i >= 0 ; i--) {
-            if (canvas.getShapeList().get(i).inSide(p)) {
+            if (canvas.getShapeList().get(i).inside(point)) {
                 return i;
             }
         }
-        return -1;
+        return -1; // no shape
     }
 
     public void removeOldPort() {
-        for (Shape s: canvas.getShapeSelected()) {
-            s.setSelected(false);
+        for (Shape shape: canvas.getShapeSelected()) {
+            shape.setSelected(false);
         }
         canvas.getShapeSelected().clear();
     }
-
-
 }

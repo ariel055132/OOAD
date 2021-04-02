@@ -9,14 +9,14 @@ public class GroupObject extends Shape{
 
     public GroupObject(List<Shape>shapeList) {
         this.shapeList = new ArrayList<>();
-        for (Shape shape : shapeList) {
-            this.shapeList.add(shape);
-        }
+        this.shapeList.addAll(shapeList);
         System.out.println(this.shapeList.size());
     }
 
-    public GroupObject() {
-        System.out.println("Nothing Nothing Nothing");
+    // getter method for shapeList
+    @Override
+    public List<Shape> getShapeList() {
+        return shapeList;
     }
 
     @Override
@@ -38,9 +38,7 @@ public class GroupObject extends Shape{
     public List<Port> getPortsPosition() {
         List<Port> portPosition = new ArrayList<>();
         for (Shape shape : shapeList) {
-            for (Port port : shape.getPortsPosition()) {
-                portPosition.add(port);
-            }
+            portPosition.addAll(shape.getPortsPosition());
         }
         return portPosition;
     }
@@ -49,32 +47,24 @@ public class GroupObject extends Shape{
     public void adjust(int offsetX, int offsetY) {
         for (Shape shape : shapeList) {
             shape.adjust(offsetX, offsetY);
-            shape.depth = 90;
+            shape.depth = 99;
         }
     }
 
-    // inside the dragged area ?
+    // inside the dragged area or not
     @Override
-    public boolean inSide(Point point) {
+    public boolean inside(Point point) {
         for (Shape shape : shapeList) {
-            if (shape.inSide(point)) {
+            if (shape.inside(point)) {
                 return true;
             }
         }
         return false;
     }
 
-    public boolean isContain(Shape shape) {
-        if (shapeList.contains(shape)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     @Override
     public void checkOverlap() {
-        int tmpDepth = 200;
+        int tmpDepth = 110;
         for (Shape shape : shapeList) {
             shape.checkOverlap();
             if (tmpDepth > shape.depth) {
@@ -84,6 +74,7 @@ public class GroupObject extends Shape{
         this.depth = tmpDepth;
     }
 
+    // intersect?
     public boolean isIntersected(Rectangle rectangle) {
         for (Shape shape : shapeList) {
             if (rectangle.intersects(shape.getOwnShape())) {
@@ -102,11 +93,4 @@ public class GroupObject extends Shape{
         }
         return false;
     }
-
-    // getter method for shapeList
-    @Override
-    public List<Shape> getShapeList() {
-        return shapeList;
-    }
-
 }

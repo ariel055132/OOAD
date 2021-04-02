@@ -12,9 +12,38 @@ public abstract class Shape {
     public boolean isSelected = false;
     public String objName;
     public List<Port> portsPosition = new ArrayList<>();
-    public int xForAlign;  // for string alignment
+    public int fontAlign;  // for string alignment
 
     public abstract void draw(Graphics2D g);
+    // Position in Java FX
+    public int getWidth() {
+        return width;
+    }
+    public int getHeight() {
+        return height;
+    }
+    public Point getPoint1() {
+        return point1;
+    }
+    public void setPoint1(Point point1) {
+        this.point1 = point1;
+    }
+    public int getDepth() {return depth; }
+    public void setDepth(int depth) {
+        this.depth = depth;
+    }
+    public void setSelected(boolean isSelected) {
+        this.isSelected = isSelected;
+    }
+    public List<Shape> getShapeList() {
+        return null;
+    }
+    public Rectangle getOwnShape() { //if line can be covered, it should be change
+        return new Rectangle(point1.x, point1.y, this.width, this.height);
+    }
+    public boolean isIntersected(Rectangle rectangle) {
+        return this.getOwnShape().intersects(rectangle);
+    }
 
     public Port findNearestPort(Point p) {
         int i;
@@ -30,20 +59,24 @@ public abstract class Shape {
     }
 
     public double getDistance(Point point1, Point point2){
-        double distance = Math.sqrt((point1.x-point2.x)*(point1.x-point2.x)+(point1.y-point2.y)*(point1.y-point2.y));
-        return distance;
+        return Math.sqrt((point1.x-point2.x)*(point1.x-point2.x)+(point1.y-point2.y)*(point1.y-point2.y));
     }
 
     // updatePortPosition in UML JAVA FX
     public void updatePortPosition() {
         Port rightPort = new Port(new Point(point1.x+width, point1.y+height/2));
         Port leftPort = new Port(new Point(point1.x, point1.y+height/2));
-        Port bottomPort = new Port(new Point(point1.x + width / 2,  point1.y + height));
-        Port topPort = new Port(new Point(point1.x + width / 2,  point1.y));
+        Port bottomPort = new Port(new Point(point1.x + width/2,  point1.y + height));
+        Port topPort = new Port(new Point(point1.x + width/2,  point1.y));
         portsPosition.add(rightPort);
         portsPosition.add(leftPort);
         portsPosition.add(bottomPort);
         portsPosition.add(topPort);
+    }
+
+    // updatePortPosition in JAVA FX
+    public List<Port> getPortsPosition() {
+        return portsPosition;
     }
 
     // Adjust the position according to the offset of X and Y
@@ -57,44 +90,21 @@ public abstract class Shape {
 
     // Edit Object Name in Class Object and UseCase Object
     public void setObjName(String objName) {
-        int halfLeft = (this.width - objName.length()*6)/ 2;
-        this.xForAlign = halfLeft;
+        this.fontAlign = (this.width - objName.length()*6)/ 2;
         this.objName = objName;
-    }
-
-    public List<Port> getPortsPosition() {
-        return portsPosition;
     }
 
     public boolean isInRectangle(Rectangle bound) {
         Rectangle shapeRange = new Rectangle(this.getPoint1().x, this.getPoint1().y, this.getWidth(), this.getHeight());
-        if (bound.contains(shapeRange))
-            return true;
-        else return false;
+        return bound.contains(shapeRange);
     }
 
-    // Point inside the object?
-    public boolean inSide(Point point) {
+    // Point inside the object
+    public boolean inside(Point point) {
         if (point.x >= point1.x && point.x <= point1.x + width) {
-            if (point.y >= point1.y && point.y <= point1.y + height) {
-                return true;
-            }
+            return point.y >= point1.y && point.y <= point1.y + height; // return true
         }
         return false;
-    }
-
-    // The following 4 function are similar as Position in Java FX
-    public int getWidth() {
-        return width;
-    }
-    public int getHeight() {
-        return height;
-    }
-    public Point getPoint1() {
-        return point1;
-    }
-    public void setPoint1(Point point1) {
-        this.point1 = point1;
     }
 
     public void checkOverlap() {
@@ -108,30 +118,4 @@ public abstract class Shape {
             }
         }
     }
-
-
-    public Rectangle getOwnShape() { //if line can be covered, it should be change
-        return new Rectangle(point1.x, point1.y, this.width, this.height);
-    }
-    public int getDepth() {
-        return depth;
-    }
-    public void setDepth(int depth) {
-        this.depth = depth;
-    }
-    public void setSelected(boolean b) {
-        this.isSelected = b;
-    }
-
-    public boolean isIntersected(Rectangle r) {
-        if (this.getOwnShape().intersects(r)) {
-            return true;
-        }
-        return false;
-    }
-
-    public List<Shape> getShapeList() {
-        return null;
-    }
-
 }

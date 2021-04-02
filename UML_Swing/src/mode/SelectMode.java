@@ -13,19 +13,17 @@ public class SelectMode extends BaseObjectMode{
         this.menuBar = MenuBar.getMenuBar();
     }
     @Override
-    public void mousePressed(MouseEvent e) {
-        startPoint = e.getPoint();
+    public void mousePressed(MouseEvent mouseEvent) {
+        startPoint = mouseEvent.getPoint();
         hasShape = checkInShape(startPoint);
         removeOldPort();
     }
 
     // https://pydoing.blogspot.com/2012/09/java-api-setSelected.html
     @Override
-    public void mouseReleased(MouseEvent e) {
-        menuBar.setGroupItem(false);
-        menuBar.setUnGroupItem(false);
-        menuBar.setNameItem(false);
-        endPoint = e.getPoint();
+    public void mouseReleased(MouseEvent mouseEvent) {
+        setMenuBar();
+        endPoint = mouseEvent.getPoint();
         // drag the area
         if (!endPoint.equals(startPoint)) {
             int offsetX = endPoint.x - startPoint.x;
@@ -33,20 +31,17 @@ public class SelectMode extends BaseObjectMode{
             if (hasShape != -1) {
                 Shape shape = canvas.getShapeList().get(hasShape);
                 shape.adjust(offsetX, offsetY);
-                System.out.println(e.getPoint());
+                System.out.println(mouseEvent.getPoint());
                 shape.setDepth(90);
                 shape.checkOverlap();
-
-
             }else if (hasShape == -1) {
                 selectShape(offsetX, offsetY);
                 for (Shape shape : canvas.getShapeSelected()) {
                     shape.setSelected(true);
                 }
             }
-
             if (canvas.getShapeSelected().size() >= 2) {
-                menuBar.setGroupItem(true);
+                menuBar.setGroup(true);
             }
         } else {
             if (hasShape != -1) {
@@ -56,22 +51,27 @@ public class SelectMode extends BaseObjectMode{
                 shape.checkOverlap();
             }
         }
-
         // ungroup
         if (canvas.getShapeSelected().size() != 0 && canvas.getShapeSelected().get(0).getShapeList() != null) {
-            menuBar.setUnGroupItem(true);
+            menuBar.setUngroup(true);
         }
 
         // edit the object name
         if (canvas.getShapeSelected().size() == 1) {
-            menuBar.setNameItem(true);
+            menuBar.setObjectname(true);
         }
 
     }
 
+    public void setMenuBar() {
+        menuBar.setGroup(false);
+        menuBar.setUngroup(false);
+        menuBar.setObjectname(false);
+    }
+
     // select Shapes that are in dragged area
     public void selectShape(int offsetX, int offsetY) {
-        Rectangle bound = null; // bound of the dragged area
+        Rectangle bound; // bound of the dragged area
         // right bottom -> left top
         // right top -> left down
         // left bottom -> right top

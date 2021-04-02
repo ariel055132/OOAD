@@ -2,12 +2,11 @@ package object;
 
 import java.awt.*;
 
-// Use ClassObj because error exists when using ClassObject
 public class ClassObject extends Shape{
     public ClassObject(Point point) {
         this.width = 100;
         this.height = 110;
-        this.xForAlign = 20;
+        this.fontAlign = 20;
         this.point1 = point;
         this.objName = "Object Name";
         updatePortPosition();
@@ -24,9 +23,7 @@ public class ClassObject extends Shape{
         // https://pydoing.blogspot.com/2012/05/java-api-drawline.html
         graphics2D.drawLine(point1.x, point1.y + spacing, point2.x, point2.y + spacing);
         graphics2D.drawLine(point1.x, point1.y + spacing * 2, point2.x, point2.y + spacing * 2);
-        graphics2D.drawString(objName,point1.x + xForAlign, point1.y + 20);
-
-        // To-do: Show Port when in select mode and get selected
+        graphics2D.drawString(objName,point1.x + fontAlign, point1.y + 20);
         if (this.isSelected) {
             for (Port port : portsPosition) {
                 port.draw(graphics2D);

@@ -1,18 +1,17 @@
 package mode;
 
+import object.Port;
+import object.Shape;
+
 import java.awt.*;
 import java.awt.event.MouseEvent;
-
-import gui.Canvas;
-import object.*;
-import object.Shape;
 
 public class BaseLineMode extends BaseObjectMode{
     public Port startPort, endPort;
     public Shape startShape, endShape;
 
-    public void mousePressed(MouseEvent e) {
-        startPoint = e.getPoint();
+    public void mousePressed(MouseEvent mouseEvent) {
+        startPoint = mouseEvent.getPoint();
         int tmp = checkInShape(startPoint);
         if (tmp != -1) {
             startShape = canvas.getShapeList().get(tmp);
@@ -25,9 +24,7 @@ public class BaseLineMode extends BaseObjectMode{
         }
     }
 
-    public void mouseReleased(MouseEvent e) {
-
-    }
+    public void mouseReleased(MouseEvent mouseEvent) {}
 
     public boolean checkWhetherAdd(Point endPoint) {
         int tmp = checkInShape(endPoint);

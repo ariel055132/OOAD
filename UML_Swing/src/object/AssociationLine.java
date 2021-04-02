@@ -13,7 +13,6 @@ public class AssociationLine extends Line{
     @Override
     public void draw(Graphics2D graphics2D) {
         super.draw(graphics2D);
-
         graphics2D.drawLine(endPoint.x, endPoint.y, x3, y3);
         graphics2D.drawLine(endPoint.x, endPoint.y, x4, y4);
         // draw the arrowhead and the line

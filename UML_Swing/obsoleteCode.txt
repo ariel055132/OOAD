@@ -1,0 +1,50 @@
+Main.java
+	main.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        main.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                int result=JOptionPane.showConfirmDialog((Component)e.getSource(),
+                        "Are you sure you want to exit?",
+                        "Confirm Exit",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.WARNING_MESSAGE);
+                if (result == JOptionPane.YES_OPTION) {System.exit(0);}
+            }
+        });
+
+MenuBar.java
+    class groupItemListener implements ActionListener {
+        public void actionPerformed(ActionEvent e){
+            Canvas.getInstance().groupObj();
+        }
+    }
+    
+    class unGroupItemListener implements ActionListener {
+        public void actionPerformed(ActionEvent e){
+            Canvas.getInstance().unGroupObj();
+        }
+    }
+
+    class nameItemListener implements ActionListener {
+        public void actionPerformed(ActionEvent e){
+            Canvas.getInstance().changeName();
+            Canvas.getInstance().repaint();
+        }
+    }
+
+SelectMode
+        /*
+        menuBar.setGroup(false);
+        menuBar.setUngroup(false);
+        menuBar.setObjectname(false);
+         */
+
+
+    baseObjectMode
+    public void mouseClicked(MouseEvent e){
+
+    }
+
+    groupObject.java
+    public GroupObject() {
+        System.out.println("Nothing Nothing Nothing");
+    }

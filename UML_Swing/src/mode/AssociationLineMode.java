@@ -6,15 +6,15 @@ import java.awt.event.MouseEvent;
 
 public class AssociationLineMode extends BaseLineMode{
     @Override
-    public void mousePressed(MouseEvent e) {
-        super.mousePressed(e);
+    public void mousePressed(MouseEvent mouseEvent) {
+        super.mousePressed(mouseEvent);
     }
 
     @Override
-    public void mouseReleased(MouseEvent e) {
-        endPoint = e.getPoint();
+    public void mouseReleased(MouseEvent mouseEvent) {
+        endPoint = mouseEvent.getPoint();
         if (checkWhetherAdd(endPoint)) {
-            canvas.getSLineList().add(new AssociationLine(startPort, endPort));
+            canvas.getLineList().add(new AssociationLine(startPort, endPort));
         }
     }
 }

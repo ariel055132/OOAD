@@ -22,7 +22,7 @@ public class Port extends Shape{
     }
 
     @Override
-    public boolean inSide(Point point) {
+    public boolean inside(Point point) {
         return false;
     }
 }
